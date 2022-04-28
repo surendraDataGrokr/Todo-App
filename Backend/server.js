@@ -18,9 +18,11 @@ app.use(cors());
 // routers
 import CreateNote from "./routes/create_note.js"
 import ReadNote from "./routes/read_note.js"
+import FetchNotes from "./routes/fetch_notes.js"
 
 app.use(CreateNote)
 app.use(ReadNote)
+app.use(FetchNotes)
 
 // listner
 const port = process.env.PORT || 8001;
