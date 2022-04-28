@@ -6,7 +6,7 @@ var ddb = new AWS.DynamoDB({apiVersion: '2012-08-10'});
 
 const router = express.Router()
 
-router.post('/create-note', async (req, res)=>{
+router.post('/', async (req, res)=>{
     const body = req.body
     var params = {
         Item: {
@@ -16,11 +16,14 @@ router.post('/create-note', async (req, res)=>{
             "content": {
                 S: body.content
             },
-            "author": {
-                S: body.author
+            "username": {
+                S: body.username
+            },
+            "note_id": {
+                S: new Date().valueOf().toString()
             },
             "datetime": {
-                S: new Date().valueOf().toString()
+                S: new Date().toDateString()
             }
         }, 
         TableName: process.env.TABLE_NAME,
