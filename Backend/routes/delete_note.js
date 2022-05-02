@@ -6,12 +6,14 @@ var ddb = new AWS.DynamoDB({apiVersion: '2012-08-10'});
 
 const router = express.Router()
 
-router.get('/note/:id', (req, res)=>{
-    const noteId = req.params.id
+router.delete('/delete_note', (req, res)=>{
+    const noteId = req.body.note_id
+    const username = req.body.username
+
     var params = {
         Key: {
             "username": {
-                S: 'surendra_kumar'
+                S: username
             },
             "note_id": {
                 S: noteId
@@ -20,7 +22,7 @@ router.get('/note/:id', (req, res)=>{
         TableName: process.env.TABLE_NAME,
     };
 
-    ddb.getItem(params, function(err, data) {
+    ddb.deleteItem(params, function(err, data) {
         if (err) {
             res.status(400).send(err)
         } else {

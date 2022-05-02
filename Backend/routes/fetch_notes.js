@@ -6,7 +6,7 @@ var ddb = new AWS.DynamoDB({apiVersion: '2012-08-10'});
 
 const router = express.Router()
 
-router.get('/', async (req, res)=>{
+router.post('/all-notes', async (req, res)=>{
     const username = req.body.username
     var params = {
         TableName: process.env.TABLE_NAME,
