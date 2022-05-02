@@ -23,8 +23,7 @@ export default function AllNotes(){
         <Grid container>
             {
                 notes.map((note, i)=>{
-                    console.log(i + ' ' + notes[i])
-                    return (<NoteCard key={i} title={note.title.S} content={note.content.S} />)
+                    return (<NoteCard key={i} note={note} />)
                 })
             }
         </Grid>
