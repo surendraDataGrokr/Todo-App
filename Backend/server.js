@@ -17,12 +17,10 @@ app.use(cors());
 
 // routers
 import CreateNote from "./routes/create_note.js"
-import ReadNote from "./routes/read_note.js"
 import FetchNotes from "./routes/fetch_notes.js"
 import DeleteNote from "./routes/delete_note.js"
 
 app.use(CreateNote)
-app.use(ReadNote)
 app.use(FetchNotes)
 app.use(DeleteNote)
 

@@ -7,21 +7,22 @@ var ddb = new AWS.DynamoDB({apiVersion: '2012-08-10'});
 const router = express.Router()
 
 router.delete('/delete_note', (req, res)=>{
-    const noteId = req.body.note_id
+    
+    const note_id = req.body.note_id
     const username = req.body.username
-
+    
     var params = {
         Key: {
             "username": {
                 S: username
             },
             "note_id": {
-                S: noteId
+                S: note_id
             }
         }, 
         TableName: process.env.TABLE_NAME,
     };
-
+    
     ddb.deleteItem(params, function(err, data) {
         if (err) {
             res.status(400).send(err)
