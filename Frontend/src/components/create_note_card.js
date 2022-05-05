@@ -2,6 +2,7 @@ import * as React from 'react';
 import { useState } from 'react';
 import axios from 'axios'
 import config from '../config.json'
+import { createNote } from '../utils/services';
 
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
@@ -34,15 +35,16 @@ export default function CreateNoteCard() {
             setRequiredFieldsAlertTextDialogOpen(true)
             return
         }
-        const response = await axios.post(config.REACT_APP_BASE_URL,{
-            'title': title,
-            'content': noteContent,
-            'username': 'surendra_kumar'
-        })
-        if(response.status === 200){
-            setNoteCreatedAlertText(response.data)
+        const username = config.REACT_APP_USERNAME
+        const res = await createNote(title, noteContent, username)
+        
+        if(res.status === 200){
+            setNoteCreatedAlertText(res.data)
         }
-        else setNoteCreatedAlertText('Got an Error while saving your note.  :(')
+        else{
+            setNoteCreatedAlertText('Got an Error while saving your note.  :(')
+            console.log(res)
+        }
         setNoteCreatedAlertTextDialogOpen(true)
         setTitle('')
         setNoteContent('')
